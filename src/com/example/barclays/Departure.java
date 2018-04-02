@@ -13,7 +13,7 @@ public class Departure {
 	private String destination;
 	private Date flightTime;
 
-	List<Bag> bags = new ArrayList<Bag>();
+	List<Luggage> luggages = new ArrayList<Luggage>();
 
 	public Departure(String flightId, String flightGate, String destination, String date) {
 		this.flightId = flightId;
@@ -69,7 +69,7 @@ public class Departure {
 		this.flightTime = flightTime;
 	}
 
-	public void addBags(Bag bag) {
-		this.bags.add(bag);
+	public void addBags(Luggage luggage) {
+		this.luggages.add(luggage);
 	}
 }

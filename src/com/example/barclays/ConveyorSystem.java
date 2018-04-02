@@ -7,29 +7,29 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class ConveyorSystem {
-	private Map<String, Node> points = new HashMap<String, Node>();
+	private Map<String, Point> points = new HashMap<String, Point>();
 
-	public Map<String, Node> getPoints() {
+	public Map<String, Point> getPoints() {
 		return points;
 	}
 
-	public void setPoints(Map<String, Node> points) {
+	public void setPoints(Map<String, Point> points) {
 		this.points = points;
 	}
 
 	public void buildConveyorPath(String s, String d, int t) {
-		Node dest = null;
-		Node source = null;
+		Point dest = null;
+		Point source = null;
 
 		if (!this.points.containsKey(s)) {
-			source = new Node(s);
+			source = new Point(s);
 			this.points.put(s, source);
 		} else {
 			source = this.points.get(s);
 		}
 
 		if (!this.points.containsKey(d)) {
-			dest = new Node(d);
+			dest = new Point(d);
 			this.points.put(d, dest);
 		} else {
 			dest = this.points.get(d);
@@ -42,52 +42,52 @@ public class ConveyorSystem {
 		dest.addDestination(dp);
 	}
 
-	private Path createDestination(Node source, int t) {
+	private Path createDestination(Point source, int t) {
 		return new Path(source, t);
 	}
 
 	public double findPath(String start, String end) {
-		Node node = this.points.get(start);
+		Point point = this.points.get(start);
 
-		Queue<Node> queue = new PriorityQueue<Node>();
-		queue.add(node);
+		Queue<Point> queue = new PriorityQueue<Point>();
+		queue.add(point);
 
-		node.setMinimumDistance(0);
+		point.setMinimumDistance(0);
 
 		while (!queue.isEmpty()) {
-			Node n = queue.poll();
+			Point n = queue.poll();
 
 			List<Path> destinations = n.getDestinations();
 			for (Path path : destinations) {
-				Node targetNode = path.getTargetNode();
+				Point targetPoint = path.getTargetPoint();
 				int travelTime = path.getTravelTime();
 
 				double distance = n.getMinimumDistance() + travelTime;
 
-				if (distance < targetNode.getMinimumDistance()) {
-					targetNode.setMinimumDistance(distance);
-					targetNode.setPrev(n);
+				if (distance < targetPoint.getMinimumDistance()) {
+					targetPoint.setMinimumDistance(distance);
+					targetPoint.setPrev(n);
 
-					queue.add(targetNode);
+					queue.add(targetPoint);
 				}
 			}
 		}
 
-		Node node2 = this.points.get(end);
+		Point point2 = this.points.get(end);
 
-		if (node2 != null) {
-			return node2.getMinimumDistance();
+		if (point2 != null) {
+			return point2.getMinimumDistance();
 		} else {
 			return 0;
 		}
 	}
 
 	public String showPath(String targetNode) {
-		Node node = this.points.get(targetNode);
+		Point point = this.points.get(targetNode);
 
 		StringBuilder sb = new StringBuilder();
 
-		for (Node n = node; n != null; n = n.getPrev()) {
+		for (Point n = point; n != null; n = n.getPrev()) {
 			sb.insert(0, " " + n.getName());
 		}
 

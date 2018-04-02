@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AirportBaggage {
+public class ProblemOne {
 
 	/**
 	 * @param args
@@ -19,10 +19,10 @@ public class AirportBaggage {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		ConveyorSystem conveyorSystem = new ConveyorSystem();
 		Map<String, Departure> departures = new HashMap<String, Departure>();
-		List<Bag> bags = new ArrayList<Bag>();
+		List<Luggage> luggages = new ArrayList<Luggage>();
 
-		// BufferedReader br = new BufferedReader(new FileReader(new File("C:/",
-		// "input.txt")));
+		// BufferedReader br = new BufferedReader(new FileReader(new File("C:/","input.txt")));
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int c = 0;
 		String line = null;
@@ -45,14 +45,14 @@ public class AirportBaggage {
 			}
 
 			if (c == 3) {
-				Bag bag = new Bag(input[0], input[1], input[2]);
+				Luggage luggage = new Luggage(input[0], input[1], input[2]);
 
 				if (!input[2].equalsIgnoreCase("ARRIVAL")) {
 					Departure departure = departures.get(input[2]);
-					departure.addBags(bag);
+					departure.addBags(luggage);
 				}
 
-				bags.add(bag);
+				luggages.add(luggage);
 			}
 
 			if (line.contains(new String("ARRIVAL"))) {
@@ -62,26 +62,26 @@ public class AirportBaggage {
 
 		br.close();
 
-		for (Bag bag : bags) {
+		for (Luggage luggage : luggages) {
 			String end = null;
 
-			if (bag.getFlightId().equalsIgnoreCase("ARRIVAL")) {
+			if (luggage.getFlightId().equalsIgnoreCase("ARRIVAL")) {
 				end = "BaggageClaim";
 			} else {
-				Departure departure = departures.get(bag.getFlightId());
+				Departure departure = departures.get(luggage.getFlightId());
 				end = departure.getFlightGate();
 			}
 
-			Double totalTime = conveyorSystem.findPath(bag.getEntryPoint(), end);
+			Double totalTime = conveyorSystem.findPath(luggage.getEntryPoint(), end);
 
-			System.out.println(bag.getBagNumber() + " " + conveyorSystem.showPath(end) + " : " + totalTime.intValue());
+			System.out.println(luggage.getBagNumber() + " " + conveyorSystem.showPath(end) + " : " + totalTime.intValue());
 
-			Map<String, Node> points = conveyorSystem.getPoints();
-			Collection<Node> values = points.values();
+			Map<String, Point> points = conveyorSystem.getPoints();
+			Collection<Point> values = points.values();
 
-			for (Node node : values) {
-				node.setMinimumDistance(Double.POSITIVE_INFINITY);
-				node.setPrev(null);
+			for (Point point : values) {
+				point.setMinimumDistance(Double.POSITIVE_INFINITY);
+				point.setPrev(null);
 			}
 		}
 	}

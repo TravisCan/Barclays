@@ -3,14 +3,14 @@ package com.example.barclays;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node implements Comparable<Node> {
+public class Point implements Comparable<Point> {
 
 	private String name;
 	private List<Path> destinations = new ArrayList<Path>();
 	private double minimumDistance = Double.POSITIVE_INFINITY;
-	private Node prev;
+	private Point prev;
 
-	public Node(String name) {
+	public Point(String name) {
 		this.name = name;
 	}
 
@@ -38,11 +38,11 @@ public class Node implements Comparable<Node> {
 		this.minimumDistance = minimumDistance;
 	}
 
-	public Node getPrev() {
+	public Point getPrev() {
 		return prev;
 	}
 
-	public void setPrev(Node prev) {
+	public void setPrev(Point prev) {
 		this.prev = prev;
 	}
 
@@ -69,7 +69,7 @@ public class Node implements Comparable<Node> {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Node other = (Node) obj;
+		Point other = (Point) obj;
 		if (name == null) {
 			if (other.name != null) {
 				return false;
@@ -86,7 +86,7 @@ public class Node implements Comparable<Node> {
 	}
 
 	@Override
-	public int compareTo(Node o) {
+	public int compareTo(Point o) {
 		return Double.compare(this.minimumDistance, o.minimumDistance);
 	}
 

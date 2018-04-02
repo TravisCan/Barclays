@@ -1,21 +1,21 @@
 package com.example.barclays;
 
 public class Path {
-	private Node targetNode;
+	private Point targetPoint;
 
 	private int travelTime;
 
-	public Path(Node targetNode, int travelTime) {
-		this.targetNode = targetNode;
+	public Path(Point targetPoint, int travelTime) {
+		this.targetPoint = targetPoint;
 		this.travelTime = travelTime;
 	}
 
-	public Node getTargetNode() {
-		return targetNode;
+	public Point getTargetPoint() {
+		return targetPoint;
 	}
 
-	public void setTargetNode(Node targetNode) {
-		this.targetNode = targetNode;
+	public void setTargetPoint(Point targetPoint) {
+		this.targetPoint = targetPoint;
 	}
 
 	public int getTravelTime() {
@@ -30,7 +30,7 @@ public class Path {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((targetNode == null) ? 0 : targetNode.hashCode());
+		result = prime * result + ((targetPoint == null) ? 0 : targetPoint.hashCode());
 		return result;
 	}
 
@@ -46,11 +46,11 @@ public class Path {
 			return false;
 		}
 		Path other = (Path) obj;
-		if (targetNode == null) {
-			if (other.targetNode != null) {
+		if (targetPoint == null) {
+			if (other.targetPoint != null) {
 				return false;
 			}
-		} else if (!targetNode.equals(other.targetNode)) {
+		} else if (!targetPoint.equals(other.targetPoint)) {
 			return false;
 		}
 		return true;
@@ -58,7 +58,7 @@ public class Path {
 
 	@Override
 	public String toString() {
-		return "Destination [node=" + targetNode + ", travelTime=" + travelTime + "]";
+		return "Destination [node=" + targetPoint + ", travelTime=" + travelTime + "]";
 	}
 
 }

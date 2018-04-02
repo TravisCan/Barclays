@@ -1,11 +1,11 @@
 package com.example.barclays;
 
-public class Bag {
+public class Luggage {
 	private String bagNumber;
 	private String entryPoint;
 	private String flightId;
 
-	public Bag(String bagNumber, String entryPoint, String flightId) {
+	public Luggage(String bagNumber, String entryPoint, String flightId) {
 		this.bagNumber = bagNumber;
 		this.entryPoint = entryPoint;
 		this.flightId = flightId;
